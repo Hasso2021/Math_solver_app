@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Kirikou</title>
+   <!-- <link href="index.css" rel="stylesheet" type="text/css" /> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.min.js" integrity="sha512-SuxO9djzjML6b9w9/I07IWnLnQhgyYVSpHZx0JV97kGBfTIsUYlWflyuW4ypnvhBrslz1yJ3R+S14fdCWmSmSA==" crossorigin="anonymous"></script>    <style>
+        body {
+            margin-top: 0px;
+            margin-left: auto;
+            margin-right: auto;
+            font-family: "Segoe UI", Verdana, Geneva, Tahoma, sans-serif;
+            background-color: white;
+        }
+        
+       
+.slidecontainer {
+  width: 30%; /* Width of the outside container */
+  margin: 0 auto;
+}
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+    </style>
+</head>
+
+<body>
+    
+
+    <div style="width:1000px;margin-left: auto;margin-right: auto;">
+        
+
+           
+            <h1 style="font-size: 20px;text-align: left;">Qudratic Equations</h1>
+            <p>Please enter the coefficients <strong>a</strong>, <strong>b</strong> and <strong>c</strong> of a quadratic equation of the form <strong>ax&#x00B2; - bx + c = 0</strong></p>
+
+            <form name="input_form" action="javascript:validate();">
+                
+                Title: <input type="text" name="atitle" required>   a: <input type="text" name="aterm" size="5" required> b: <input type="text" name="bterm" size="5" required> c: <input type="text" name="cterm" size="5" required>   <input type="submit" value="submit">
+                <br><br>
+                <input type="submit" value="Calculate">
+              
+            </form>
+
+            <p id="output_text" />
+        
+    </div>
+    <div class="chart-container">
+    <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
+    <br>
+    <div class="slidecontainer">
+        <input type="range" min="-100" max="100" value="0" class="slider" id="myRangeA">
+        <p>a: <span id="demo"></span></p><br>
+      
+        <input type="range" min="-100" max="100" value="0" class="slider" id="myRangeB">
+        <p>b: <span id="demo1"></span></p><br>
+
+        <input type="range" min="-100" max="100" value="0" class="slider" id="myRangeC">
+        <p>c: <span id="demo2"></span></p>
+    </div>
+    
+</body>
+<script>
+    var a, b, c;
+    var outputText;
+
+    function validate() {
+
+        // get the input
+        a =document.getElementById("myRangeA") .value;
+        b =document.getElementById("myRangeB").value;
+        c = document.getElementById("myRangeC").value;
+
+        // validate a, b and c
+        if (a == 0) {
+            outputText = "<em>a</em> cannot equal zero!";
+        } else if (isNaN(a)) {
+            outputText = "<em>a</em> must be a number!";
+        } else if (isNaN(b)) {
+            outputText = "<em>b</em> must be a number!";
+        } else if (isNaN(c)) {
+            outputText = "<em>c</em> must be a number!";
+        } else {
+            // calculate the result using x = (-b +- sqrt(b^2 - 4ac)) / 2a
+            var x1 = (-b - Math.sqrt(Math.pow(b, 2) - 4 * a * c)) / (2 * a);
+            var x2 = (-b + Math.sqrt(Math.pow(b, 2) - 4 * a * c)) / (2 * a);
+            outputText = "For the equation <strong>" + (a == 1 ? "" : a) + "x\u00B2 + " + (b == 1 ? "" : b) + "x + " + c + " = 0</strong>, x can equal <strong>" + x1 + "</strong> or <strong>" + x2 + "</strong>";
+         
+        
+       
+        }
+
+        // output the result (or errors)
+        document.getElementById("output_text").innerHTML = outputText;
+
+
+
+    
+
+       var ctx = document.getElementById("myChart");
+       var data = {
+	     labels: [-5,-4,-3,-2,-1,0,1,2,3,4,5],
+        datasets: [{
+  
+        label: "f(x) = " + outputText,
+        function: function(x) {return a*x*x +b*x + c*x} ,
+        borderColor: "green",
+        data: [],
+        fill: false
+        }]
+        };
+      
+
+      Chart.pluginService.register({
+     beforeInit: function(chart) {
+        var data = chart.config.data; 
+        for (var i = 0; i < data.datasets.length; i++) {
+            for (var j = 0; j < data.labels.length; j++) {
+            	var fct = data.datasets[i].function,
+                	x = data.labels[j],
+                	y = fct(x);
+                data.datasets[i].data.push(y);
+            }
+        }
+    }
+     });
+
+ var myBarChart = new Chart(ctx, {
+    type: 'line',
+    data: data,
+    options: {
+        scales: {
+            yAxes: [{
+                display: true,
+                ticks: {
+                    beginAtZero: true,
+                    max: 100,
+                    min: -100
+                }
+            }]
+        }
+    }
+ });
+
+
+var slider1 = document.getElementById("myRangeA");
+ var output1= document.getElementById("demo");
+output1.innerHTML = slider1.value;
+
+slider1.oninput = function() {
+  output1.innerHTML = this.value;
+}
+var slider2 = document.getElementById("myRangeB");
+var output2= document.getElementById("demo1");
+output2.innerHTML = slider2.value;
+
+slider2.oninput = function() {
+  output2.innerHTML = this.value;
+}
+var slider3 = document.getElementById("myRangeC");
+ var output3= document.getElementById("demo2");
+ output2.innerHTML = slider3.value;
+
+ slider3.oninput = function() {
+  output3.innerHTML = this.value;
+ }
+}
+</script>
+
+
+</html>
