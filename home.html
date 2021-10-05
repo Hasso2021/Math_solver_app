@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home </title>
+    <style>
+         body {
+            margin-top: 0px;
+            margin-left: auto;
+            margin-right: auto;
+            font-family: "Segoe UI", Verdana, Geneva, Tahoma, sans-serif;
+            background-color: white;
+        }
+        #mainheader {
+            background-color: #a593c2;
+            font-size: 40px;
+        }
+        
+        nav {
+                
+            height: 60px;
+            width: 1000px;
+            margin: 0 auto 20px;
+            font-size: 20px;
+        }
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.nav a:hover, .dropdown:hover .dropbtn {
+  background-color: red;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+        
+.searchbox {
+            padding: 5px;
+            margin: 10px 10px;
+            width: 300px;
+ }
+.chart-container {
+        width: 50%;
+        height: 50%;
+        margin: 0 auto;
+        border: 1px solid #d3d3d3;
+        }
+    </style>
+</head>
+
+<body>
+    <header id="mainheader">
+        <nav>
+            
+            <div class="dropdown">
+                <button class="dropbtn">All problems
+                  <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                  <a href="#">Qudratic Equation</a>
+                  <a href="#">Integration Problems</a>
+                  <a href="#">Optimisation Problems</a>
+                  <a href="#">Laplace Transform</a>
+                  <a href="#">Montecarlo Simulation</a>
+                </div>
+            </div>
+    
+        </nav>
+
+    </header>
+    <h1 style="font-size: 20px;text-align: center;">Welcome to Kirikou Math Solver</h1>
+    
+    <div style="width:1000px;margin-left: auto;margin-right: auto;">
+        
+            <header>
+                <h2 style="font-size: 20px;text-align: center;">Browse through the list of math problems</h2>
+            </header>
+            <input type=" search" class="searchbox" placeholder="type a math problem"> 
+            <input type="submit" value="search">
+        
+            </div>
+            
+</body>
+</html>
