@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Registration form </title>
+   <style>
+     body{
+          background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(image1.png);
+          background-size: cover;
+          height: 100vh;
+          background-position: center;
+        }
+      .login-page{
+          width: 300px;
+          padding: 10% 0 0;
+          margin: auto;
+        }
+      .form{
+          position: relative;
+          z-index: 1;
+          background-color: white;
+          max-width: 360px;
+          margin: 0 auto 100px;
+          padding: 45px;
+          text-align: center;
+        }
+      .form input{
+          font-family: "Roboto", sans-serif;
+          outline: 1;
+          background: #f2f2f2;
+          width: 100%;
+          border: 0;
+          margin: 0 0 15px;
+          padding: 15px;
+          box-sizing: border-box;
+          font-size: 14px;
+
+        }
+      .form button{
+        font-family: "Roboto", sans-serif;
+        text-transform: uppercase;
+        outline: 0;
+        background: green;
+        width: 100%;
+        border: 0;
+        padding: 15px;
+        color: #ffffff;
+        font-size: 14px;
+        cursor: pointer;
+        }
+
+        
+    </style>
+
+    
+</head>
+<body>
+    <section id="login-window">
+      
+        <div class="form">
+            <form >
+                <h1>LOGIN</h1>
+                <input type="text" placeholder="username" class="form-input" autocomplete="off" id="user">
+                <p class = "error" id="username-error">* Username is required !</p>
+                <input type="password" placeholder="password" class="form-input" autocomplete="off" id="pwd">
+                <p class = "error" id="password-error">* Password is required !</p>     
+                
+                <button class="login-btn">LOGIN</button>
+            </form>
+        </div>
+    </section>
+</body>
+<script>
+    const username = document.getElementById("user");
+    const password = document.getElementById("pwd");
+    const usernameError = document.getElementById("username-error");
+    const passwordError= document.getElementById("password-error");
+    const submitBtn = document.querySelector('.login-btn');
+
+username.addEventListener("keyup", ()=>{
+    if (user.value== ""){
+        usernameError.style.display = "block";
+
+    }
+    else{
+        usernameError.style.display = "none"
+    }
+});
+password.addEventListener("keyup", ()=>{
+    if (pwd.value== ""){
+        passwordError.style.display = "block"
+
+    }
+    else{
+        passwordError.style.display = "none"
+    }
+});
+    submitBtn.addEventListener("click", ()=>{
+    if (user.value== ""){
+        usernameError.style.display = "block"
+
+    }
+    else{
+        usernameError.style.display = "none"
+    }
+    if (pwd.value== ""){
+        passwordError.style.display = "block";
+
+    }
+    else{
+        usernameError.style.display = "none";
+        passwordError.style.display = "none";
+        let cred = {
+            userName: `${user.value}`,
+            password: `${pwd.value}`
+        }
+        console.log(cred);
+    }
+});
+    
+    
+
+
+
+
+
+</script>
+</html>
